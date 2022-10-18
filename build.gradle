@@ -1,0 +1,63 @@
+final def type = tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    defaultTasks 'clean', 'aggregate', 'test', 'aggregate'
+}
+type
+repositories {
+    jcenter()
+}
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath "net.serenity-bdd:serenity-gradle-plugin:2.1.4"
+        classpath "net.serenity-bdd:serenity-single-page-report:2.1.4"
+        classpath("net.serenity-bdd:serenity-json-summary-report:2.1.2")
+    }
+}
+
+
+
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+
+
+ext {
+    lombokVersion = '1.18.16'
+    serenityCoreVersion = '2.0.73'
+}
+
+dependencies {
+
+    implementation 'org.projectlombok:lombok:1.18.20'
+    testImplementation 'net.serenity-bdd:serenity-core:' + serenityCoreVersion
+    testImplementation 'net.serenity-bdd:serenity-junit:' + serenityCoreVersion
+    implementation 'net.serenity-bdd:serenity-core:' + serenityCoreVersion
+    implementation 'net.serenity-bdd:serenity-junit:' + serenityCoreVersion
+    implementation 'net.serenity-bdd:serenity-screenplay:' + serenityCoreVersion
+    implementation 'net.serenity-bdd:serenity-screenplay-webdriver:' + serenityCoreVersion
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.assertj:assertj-core:3.13.2'
+    testImplementation 'org.slf4j:slf4j-simple:1.7.28'
+    implementation 'net.serenity-bdd:serenity-cucumber:1.9.45'
+    implementation group: 'org.apache.poi', name: 'poi', version: '4.1.2'
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-support', version: '3.141.59'
+
+    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok:' + lombokVersion
+    annotationProcessor 'org.projectlombok:lombok:' + lombokVersion
+    testCompileOnly 'org.projectlombok:lombok:' + lombokVersion
+    testAnnotationProcessor 'org.projectlombok:lombok:' + lombokVersion
+
+}
+
+serenity {
+    reports = ['single-page-html','json-summary']
+}
+gradle.startParameter.continueOnFailure = true
