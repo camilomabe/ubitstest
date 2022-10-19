@@ -1,6 +1,7 @@
 final def type = tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
-    defaultTasks 'clean', 'aggregate', 'test', 'aggregate'
+    defaultTasks 'clean', 'aggregate'
+
 }
 type
 repositories {
@@ -14,7 +15,6 @@ buildscript {
     dependencies {
         classpath "net.serenity-bdd:serenity-gradle-plugin:2.1.4"
         classpath "net.serenity-bdd:serenity-single-page-report:2.1.4"
-        classpath("net.serenity-bdd:serenity-json-summary-report:2.1.2")
     }
 }
 
@@ -34,14 +34,14 @@ ext {
 
 dependencies {
 
-    implementation 'org.projectlombok:lombok:1.18.20'
+    implementation 'org.projectlombok:lombok:1.18.24'
     testImplementation 'net.serenity-bdd:serenity-core:' + serenityCoreVersion
     testImplementation 'net.serenity-bdd:serenity-junit:' + serenityCoreVersion
     implementation 'net.serenity-bdd:serenity-core:' + serenityCoreVersion
     implementation 'net.serenity-bdd:serenity-junit:' + serenityCoreVersion
     implementation 'net.serenity-bdd:serenity-screenplay:' + serenityCoreVersion
     implementation 'net.serenity-bdd:serenity-screenplay-webdriver:' + serenityCoreVersion
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.assertj:assertj-core:3.13.2'
     testImplementation 'org.slf4j:slf4j-simple:1.7.28'
     implementation 'net.serenity-bdd:serenity-cucumber:1.9.45'

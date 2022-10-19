@@ -23,19 +23,18 @@ public class SingInSteps {
         OnStage.setTheStage(new OnlineCast());
     }
 
-    @Given("^(.*) opens the browser in the login home$")
-    public void opensBrowserOnHome(String actor) {
+    @Given("^(.*) opens the browser in the home page$")
+    public void opensBrowserOnHomePage(String actor) {
         theActorCalled(actor).attemptsTo(NavigateTo.theWebSideHome());
     }
 
-    @When("^He enters his credentials (.*) and (.*)$")
+    @When("^he enters his credentials, (.*) and (.*)$")
     public void entersTheCredentials(String email, String pass) {
         theActorInTheSpotlight().attemptsTo(EntersCredential.forLoginIn(email, pass));
-
     }
 
-    @Then("^He validate text on payment form (.*)$")
-    public void validatesTextOnDashboard(String text) {
+    @Then("^he should see the (.*) in the payment form$")
+    public void validatesTheTextInThePaymentForm(String text) {
         theActorInTheSpotlight().should(seeThat(FormPayment.displayed(), CoreMatchers.equalTo(text)));
     }
 
